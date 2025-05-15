@@ -6,9 +6,12 @@ import com.accenture.app.javabooks.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/books")
@@ -39,5 +42,10 @@ public class BookController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
+    }
+
+    @GetMapping("/authorized")
+    public Map<String,String> authorized(@RequestParam String code){
+        return Collections.singletonMap("code", code);
     }
 }

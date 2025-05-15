@@ -25,3 +25,30 @@ spring:
 
   profiles:
     active: dev
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://127.0.0.1:9000"
+      client:
+        registration:
+          client-app:
+            provider: spring
+            client-id: client-app
+            client-secret: 12345
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8081/books/authorized"
+            scope:
+              - openid
+              - profile
+              - libros.read
+              - libros.write
+            client-name: client-app
+        provider:
+          spring:
+            issuer-uri: "http://127.0.0.1:9000"
+
+          github:
+            client-id: Ov23linKws69xtNbPeDb
+            client-secret: a92234b7b3b68ff9ce1b6e4859e7fe78c16bf07b
